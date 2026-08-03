@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+    service.beta.kubernetes.io/aws-load-balancer-subnets: subnet-0110e13e7563ceca6,subnet-0d60369aa902ec880,subnet-0408d3635163ccef8
+  creationTimestamp: "2026-08-02T19:18:06Z"
+  finalizers:
+  - service.eks.amazonaws.com/resources
+  labels:
+    app: react-app
+  name: react-app-service
+  namespace: default
+  resourceVersion: "361233"
+  uid: 2c019c12-42ac-4ba8-a1ce-eced5b0d5aba
+spec:
+  allocateLoadBalancerNodePorts: true
+  clusterIP: 10.100.169.105
+  clusterIPs:
+  - 10.100.169.105
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  loadBalancerClass: eks.amazonaws.com/nlb
+  ports:
+  - nodePort: 32257
+    port: 80
+    protocol: TCP
+    targetPort: 5173
+  selector:
+    app: react-app
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - hostname: k8s-default-reactapp-ac50b0e66e-dbe7a8cb845f65fe.elb.ap-south-1.amazonaws.com
